@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GiftHub Admin</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .empty {
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎁 GiftHub Admin</h1>
+
+    <div class="container">
+
+        <h2>Reward Claims</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Reward</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody id="claimsTable">
+                <tr>
+                    <td colspan="4" class="empty">
+                        Loading claims...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        async function loadClaims() {
+
+            try {
+
+                const response = await fetch("/claims");
+
+                const claims = await response.json();
+
+                const table = document.getElementById("claimsTable");
+
+                table.innerHTML = "";
+
+                if (claims.length === 0) {
+
+                    table.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="empty">
+                                No claims yet.
+                            </td>
+                        </tr>
+                    `;
+
+                    return;
+                }
+
+                claims.forEach(claim => {
+
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${claim.reward}</td>
+                        <td>${claim.name}</td>
+                        <td>${claim.phone}</td>
+                        <td>${new Date(claim.date).toLocaleString()}</td>
+                    `;
+
+                    table.appendChild(row);
+
+                });
+
+            } catch (error) {
+
+                document.getElementById("claimsTable").innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty">
+                            Unable to load claims.
+                        </td>
+                    </tr>
+                `;
+
+            }
+        }
+
+        loadClaims();
+    </script>
+
+</body>
+
+</html>

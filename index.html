@@ -1,0 +1,599 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GiftHub Rewards</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #1a73e8;
+        }
+
+        h2 {
+            margin-top: 35px;
+        }
+
+        nav {
+            background: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            margin-left: 15px;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: white;
+            padding: 50px 20px;
+            margin-bottom: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .hero button {
+            margin-top: 15px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .gift-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gift-card {
+            background: white;
+            max-width: 350px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .gift-icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .gift-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .gift-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .gift-card button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .gift-card button:hover {
+            background: #1557b0;
+        }
+
+        .reward-message {
+            display: none;
+            background: white;
+            max-width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .reward-message h3 {
+            color: #1a73e8;
+        }
+
+        .claim-form {
+            display: none;
+            background: white;
+            max-width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .claim-form input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .claim-form label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .success-message {
+            margin-top: 15px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            margin-top: 15px;
+            background: #555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #about {
+            background: white;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #about h2 {
+            color: #1a73e8;
+        }
+
+        .how-it-works {
+            max-width: 900px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            flex: 1;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-icon {
+            font-size: 40px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .contact {
+            background: white;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: #1a73e8;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #1a73e8;
+            color: white;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .gift-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gift-container .gift-card {
+                width: 90%;
+                min-width: 0;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🎁 GiftHub</div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#gifts">Gifts</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+
+            <span class="hero-badge">✨ Featured Rewards</span>
+
+            <h1>🎁 Get Free GiftHub Rewards</h1>
+
+            <p>
+                Discover featured rewards, airtime and data offers
+                available on GiftHub.
+            </p>
+
+            <button onclick="document.getElementById('gifts').scrollIntoView()">
+                Explore Rewards
+            </button>
+
+        </div>
+    </div>
+
+
+    <!-- Gifts Section -->
+    <h2 id="gifts">🎁 Today's Featured Gifts</h2>
+
+    <div id="rewardMessage" class="reward-message">
+        <h3 id="selectedReward"></h3>
+        <p>Your reward has been selected.</p>
+    </div>
+
+
+    <!-- Claim Form -->
+    <div class="claim-form">
+
+        <h3>🎁 Claim Your Reward</h3>
+
+        <p id="selectedRewardForm">Reward selected</p>
+
+        <label for="name">Your Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+        >
+        <label for="phone">Phone Number</label>
+<input
+    type="tel"
+    id="phone"
+    placeholder="Enter your phone number"
+>
+
+        <button onclick="submitClaim()">Continue</button>
+
+        <div id="claimResult" class="success-message"></div>
+
+        <button onclick="location.reload()" class="back-button">
+            ← Back to Rewards
+        </button>
+
+    </div>
+
+
+    <!-- Gift Cards -->
+    <div class="gift-container">
+
+        <div class="gift-card">
+
+            <div class="gift-icon">📱</div>
+
+            <h3>Free Airtime</h3>
+
+            <p>
+                Enjoy airtime rewards for your mobile needs.
+            </p>
+
+            <button onclick="claimReward('Free Airtime')">
+                Claim Now
+            </button>
+
+        </div>
+
+
+        <div class="gift-card">
+
+            <div class="gift-icon">📶</div>
+
+            <h3>Data Bundle</h3>
+
+            <p>
+                Get a featured data bundle reward.
+            </p>
+
+            <button onclick="claimReward('Free Data Bundle')">
+                Claim Now
+            </button>
+
+        </div>
+
+
+        <div class="gift-card">
+
+            <div class="gift-icon">💰</div>
+
+            <h3>Cash Reward</h3>
+
+            <p>
+                Explore available promotional cash rewards.
+            </p>
+
+            <button onclick="claimReward('Cash Reward')">
+                Claim Now
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- About -->
+    <section id="about">
+
+        <h2>ℹ️ About GiftHub</h2>
+
+        <p>
+            GiftHub is a rewards platform where users can explore
+            available promotional rewards and featured offers.
+        </p>
+
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+
+        <h2>⚡ How It Works</h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-icon">🎁</div>
+
+                <h3>1. Choose a Reward</h3>
+
+                <p>
+                    Browse the featured rewards and select one you like.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-icon">✍️</div>
+
+                <h3>2. Enter Your Name</h3>
+
+                <p>
+                    Provide your name to continue with your selection.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-icon">✅</div>
+
+                <h3>3. Get Confirmation</h3>
+
+                <p>
+                    Receive an on-screen confirmation of your selection.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+
+        <h2>📩 Contact GiftHub</h2>
+
+        <p>
+            Have a question about our rewards? Get in touch with us.
+        </p>
+
+        <p>📧 Email: support@gifthub.example</p>
+
+        <p>📞 Phone: +254 700 000 000</p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>© 2026 GiftHub Rewards</p>
+
+        <p>Explore rewards and featured offers.</p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+   <script>
+let selectedReward = "";
+
+function claimReward(reward) {
+    selectedReward = reward;
+
+    document.getElementById("selectedReward").innerText =
+        "You selected: " + reward;
+
+    document.getElementById("selectedRewardForm").innerText =
+        "Reward: " + reward;
+
+    document.getElementById("rewardMessage").style.display = "block";
+
+    document.querySelector(".claim-form").style.display = "block";
+
+    document.querySelector(".claim-form").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+async function submitClaim() {
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    if (name.trim() === "") {
+        document.getElementById("claimResult").innerText =
+            "Please enter your name.";
+        return;
+    }
+
+    if (phone.trim() === "") {
+        document.getElementById("claimResult").innerText =
+            "Please enter your phone number.";
+        return;
+    }
+
+    const phonePattern = /^(07|01)\d{8}$/;
+
+    if (!phonePattern.test(phone.trim())) {
+        document.getElementById("claimResult").innerText =
+            "Please enter a valid Kenyan phone number.";
+        return;
+    }
+
+    try {
+        const response = await fetch("/claim", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                reward: selectedReward,
+                name: name,
+                phone: phone
+            })
+        });
+
+        const result = await response.json();
+
+        document.getElementById("claimResult").innerText =
+            result.message;
+
+    } catch (error) {
+        document.getElementById("claimResult").innerText =
+            "Unable to connect to the server.";
+    }
+}
+</script>
+</body>
+</html>
+```
