@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const claimsFile = path.join(__dirname, "claims.json");
-const PORT = 3000;
+const PORT =process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
 
